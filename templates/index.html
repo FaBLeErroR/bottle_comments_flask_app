@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Japanese Whisky Reviews</title>
+</head>
+<body>
+<div class="container">
+  <h1>Японский виски — данные из БД</h1>
+
+  <div class="tabs">
+    {% for tab_item in tabs %}
+      <a class="tab {% if tab_item.id == active_tab %}active{% endif %}"
+         href="?tab={{ tab_item.id }}&page=1">
+         {{ tab_item.title }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <table class="data">
+    <thead>
+      <tr>
+        {% for h in head %}
+          <th>{{ h }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in body %}
+        <tr>
+          {% for item in row %}
+            <td>{{ item }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
