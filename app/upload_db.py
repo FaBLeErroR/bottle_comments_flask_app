@@ -1,6 +1,8 @@
 import csv
-from config import db
-from models import Brand, Bottle, Review
+from app.config import db
+from app.models.brand import Brand
+from app.models.bottle import Bottle
+from app.models.review import Review
 
 def upload_brands():
     with open('/home/zherevchuk-da/Документы/Двфу/web/practice/app/data/japanese_whisky_review.csv') as f:
