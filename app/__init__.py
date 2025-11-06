@@ -2,9 +2,10 @@ from flask import Flask
 from .extensions import db
 from .config import DevelopmentConfig
 from app.models import Brand, Bottle, Review
+from app.schemas import BrandSchema, BottleSchema, ReviewSchema
 
 # Импортируем маршруты
-from .routes import title, brand, review
+from .routes import title, brand, review, statistic
 
 def create_app():
     app = Flask(__name__)
@@ -16,4 +17,5 @@ def create_app():
     app.register_blueprint(title.bp_title, url_prefix="/api/v1/title")
     app.register_blueprint(brand.bp_brand, url_prefix="/api/v1/brands")
     app.register_blueprint(review.bp_review, url_prefix="/api/v1/reviews")
+    app.register_blueprint(statistic.statistic_bp, url_prefix="/api/v1/statistic")
     return app

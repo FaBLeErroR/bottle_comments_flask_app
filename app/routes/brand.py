@@ -19,4 +19,3 @@ def get_brand(id):
         "success": True,
         "buildings": str(brand)
     }), 200
-

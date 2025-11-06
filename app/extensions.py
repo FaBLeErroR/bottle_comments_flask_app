@@ -1,8 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 from flask import jsonify
 from flask_httpauth import HTTPBasicAuth
 
 db = SQLAlchemy()
+ma = Marshmallow()
 auth = HTTPBasicAuth()
 
 @auth.get_password

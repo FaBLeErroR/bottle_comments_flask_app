@@ -6,7 +6,7 @@ class Bottle(db.Model):
     name = db.Column(db.String, nullable=False)
     brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'), nullable=False)
     brand = db.relationship('Brand', back_populates='bottles')
-    reviews = db.relationship('Review', back_populates='bottle', cascade='all,delete')
+    reviews = db.relationship('Review', cascade='all, delete')
     # reviews = db.relationship('Review', back_populates='bottle', cascade='all,delete-orphan')
 
     def __init__(self, name, brand_id):
@@ -15,3 +15,4 @@ class Bottle(db.Model):
 
     def __repr__(self):
         return f'\nid: {self.id}, Название: {self.name}, Брэнд: {self.brand}'
+    
