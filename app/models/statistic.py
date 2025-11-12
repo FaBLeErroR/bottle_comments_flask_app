@@ -13,8 +13,9 @@ def get_all_reviews():
             Review.title,
             Review.content
         )
-        .join(Bottle, Bottle.id == Review.bottle_id)
-        .join(Brand, Brand.id == Bottle.brand_id)
+        .select_from(Brand)
+        .join(Bottle)
+        .join(Review)
         .order_by(Brand.name, Bottle.name)
     )
     results = query.all()
@@ -37,7 +38,7 @@ def get_bottle_statistic():
             func.min(func.length(Review.content)).label("min_length"),
             func.max(func.length(Review.content)).label("max_length")
         )
-        .join(Review, Review.bottle_id == Bottle.id)
+        .join(Review)
         .group_by(Bottle.id)
         .order_by(func.count(Review.id).desc())
     )
@@ -61,8 +62,9 @@ def get_brand_statistic():
             func.min(func.length(Review.content)).label("min_length"),
             func.max(func.length(Review.content)).label("max_length")
         )
-        .join(Bottle, Bottle.brand_id == Brand.id)
-        .join(Review, Review.bottle_id == Bottle.id)
+        .select_from(Brand)
+        .join(Bottle)
+        .join(Review)
         .group_by(Brand.id)
         .order_by(func.count(Review.id).desc())
     )

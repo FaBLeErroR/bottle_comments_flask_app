@@ -6,7 +6,7 @@ from marshmallow import ValidationError
 
 bp_review = Blueprint('review', __name__)
 
-
+# curl -u student:dvfu -i http://localhost:5000/api/v1/reviews/
 @bp_review.route('/', methods=['GET'])
 @auth.login_required
 def get_reviews():
@@ -16,6 +16,7 @@ def get_reviews():
         "reviews": reviews_schema.dump(reviews)
     }), 200
 
+# curl -u student:dvfu -i http://localhost:5000/api/v1/reviews/1
 @bp_review.route('/<int:id>', methods=['GET'])
 @auth.login_required
 def get_review(id):
@@ -31,6 +32,13 @@ def get_review(id):
         "reviews": review_schema.dump(review)
     }), 200
 
+# curl -u student:dvfu -i -H "Content-Type: application/json" \
+#     -X POST http://localhost:5000/api/v1/reviews/ \
+#     -d '{
+#         "title": "Заголовок",
+#         "content": "Отзыв",
+#         "bottle_id": 1
+#     }'
 @bp_review.route('/', methods=['POST'])
 @auth.login_required
 def add_review():
@@ -65,6 +73,12 @@ def add_review():
             "error": str(e)
         }), 500
     
+# curl -u student:dvfu -i -H "Content-Type: application/json" \
+#     -X PUT http://localhost:5000/api/v1/reviews/1126 \
+#     -d '{
+#         "title": "Новый заголовок",
+#         "content": "Новый отзыв."
+#     }'
 @bp_review.route('/<int:id>', methods=['PUT'])
 @auth.login_required
 def update_review(id):
@@ -99,6 +113,7 @@ def update_review(id):
             "error": str(e)
         }), 500
     
+# curl -u student:dvfu -i -X DELETE http://localhost:5000/api/v1/reviews/1126
 @bp_review.route('/<int:id>', methods=['DELETE'])
 @auth.login_required
 def delete_review(id):
