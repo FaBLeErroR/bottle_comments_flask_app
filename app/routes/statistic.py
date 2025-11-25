@@ -24,7 +24,7 @@ def bottle_statistics():
     results = get_bottle_statistic()
     return jsonify({
         "success": True,
-        "bottle_stats": statistic_schema.dump(results)
+        "statistic": statistic_schema.dump(results)
     }), 200
 
 # curl -u student:dvfu -i http://localhost:5000/api/v1/statistic/brands/
@@ -34,7 +34,7 @@ def brand_statistics():
     results = get_brand_statistic()
     return jsonify({
         "success": True,
-        "brand_stats": statistic_schema.dump(results)
+        "statistic": statistic_schema.dump(results)
     }), 200
 
 # Написать статистику колличество отзывов для каждого бренда
