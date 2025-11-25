@@ -36,3 +36,5 @@ def brand_statistics():
         "success": True,
         "brand_stats": statistic_schema.dump(results)
     }), 200
+
+# Написать статистику колличество отзывов для каждого бренда

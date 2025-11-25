@@ -1,5 +1,6 @@
 from flask import Flask
 from .extensions import db
+from flask_cors import CORS
 from .config import DevelopmentConfig
 from app.models import Brand, Bottle, Review
 from app.schemas import BrandSchema, BottleSchema, ReviewSchema
@@ -9,6 +10,7 @@ from .routes import title, brand, review, statistic
 
 def create_app():
     app = Flask(__name__)
+    CORS(app, supports_credentials=True)
     app.json.ensure_ascii = False
     app.config.from_object(DevelopmentConfig)
     # Инициализация расширений
